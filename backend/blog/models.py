@@ -10,6 +10,7 @@ STATUS = (
 
 class Category(models.Model) :
     name = models.CharField(max_length=30)
+    description = models.TextField(null=True)
 
     class Meta:
         verbose_name_plural = "Categories"
@@ -23,7 +24,7 @@ class Post(models.Model) :
     content = models.TextField()
     slug = models.SlugField(max_length=500, unique=True)
     created_on = models.DateTimeField(auto_now_add=True)
-    edited_on = models.DateTimeField(auto_now=True)
+    updated_on = models.DateTimeField(auto_now=True)
     status = models.IntegerField(choices=STATUS, default=0)
     categories = models.ManyToManyField(Category, related_name ="posts")
 

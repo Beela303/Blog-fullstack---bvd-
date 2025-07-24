@@ -6,7 +6,7 @@ class CategoryAdmin(admin.ModelAdmin):
     pass
 
 class PostAdmin(admin.ModelAdmin) :
-    list_display = ('title', 'content', 'status', 'created_on', 'edited_on')
+    list_display = ('title', 'content', 'status', 'created_on', 'updated_on')
     list_filter = ('status',)
     search_fields = ['title', 'content']
     prepoluted_fields = {'slug': ('title',)}
