@@ -1,20 +1,17 @@
 <script>
-import Featured from '@/components/Featured.vue';
 import Aside from '@/components/Aside.vue';
 
 export default {
-  components: {
-    Featured,
-    Aside,
-  }
+    components: {
+        Aside,
+    }
 }
 </script>
 
 <template>
-  <Featured />
-  <div class="row g-5">
-    <div class="col-md-8">
-          <h2  class="display-4 text-center">Posts</h2>
+    <div class="row g-5">
+        <div class="col-md-8">
+            <h2 class="display-4 text-center">Category Name</h2>
 
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="col p-4 d-flex flex-column position-static"> <strong
@@ -29,15 +26,11 @@ export default {
         <img src="../assets/1.jpeg" alt="">    
         </div>
       </div>
-    </div>
+        </div>
 
-    <Aside />
-  </div>
+        <Aside />
+    </div>
 </template>
 
 <style>
-.col-auto img {
-  width: 250px;
-  height: 250px;
-}
 </style>
