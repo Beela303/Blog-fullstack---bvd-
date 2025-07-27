@@ -1,11 +1,36 @@
 <script>
-import Featured from '@/components/Featured.vue';
-import Aside from '@/components/Aside.vue';
+  import axios from 'axios';
+
+  import Featured from '@/components/Featured.vue';
+  import Aside from '@/components/Aside.vue';
 
 export default {
+  data() {
+    return {
+      blogPosts: []
+    }
+  },
+
   components: {
     Featured,
     Aside,
+  },
+
+  mounted() {
+    this.getBlogPosts()
+  },
+
+  methods: {
+    getBlogPosts() {
+      axios
+        .get('api/postlist/')
+        .then(response => {
+          this.blogPosts = response.data
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
   }
 }
 </script>
@@ -16,19 +41,22 @@ export default {
     <div class="col-md-8">
           <h2  class="display-4 text-center">Posts</h2>
 
-      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="col p-4 d-flex flex-column position-static"> <strong
-            class="d-inline-block mb-2 text-success-emphasis">Design</strong>
-          <h3 class="mb-0">Post title</h3>
-          <div class="mb-1 text-body-secondary">Nov 11</div>
-          <p class="mb-auto">This is a wider card with supporting text below as a natural lead-in to
-            additional content.</p>
-            <a href="" class="btn btn-secondary">Read More...</a>
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"  v-for="post in blogPosts" v-bind:key="post.id">
+        <div class="col p-4 d-flex flex-column position-static"> 
+          <strong class="d-inline-block mb-2 text-success-emphasis">{{ post.categories.name }}</strong>
+          <h3 class="mb-0">{{ post.title }}</h3>
+
+          <div class="mb-1 text-body-secondary">{{ post.created_on }}</div>
+          <p class="mb-auto">{{ post.content }}</p>
+          <router-link :to="post.get_absolute_url" class="btn btn-secondary">Read More...</router-link>
         </div>
+
         <div class="col-auto d-none d-lg-block"> 
-        <img src="../assets/1.jpeg" alt="">    
+          <img src="../assets/1.jpeg" alt="">    
         </div>
+
       </div>
+
     </div>
 
     <Aside />

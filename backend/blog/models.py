@@ -10,7 +10,7 @@ STATUS = (
 
 class Category(models.Model) :
     name = models.CharField(max_length=30)
-    description = models.TextField(null=True)
+    description = models.TextField(null=False)
 
     class Meta:
         verbose_name_plural = "Categories"

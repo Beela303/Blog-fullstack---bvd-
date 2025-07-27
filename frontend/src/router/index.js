@@ -13,7 +13,7 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: '/blog/post',
+      path: '/:category_slug/:post_slug',
       name: 'post',
       component: BlogPostView,
     },
@@ -23,7 +23,7 @@ const router = createRouter({
       component: CategoriesView,
     },
     {
-      path: '/category',
+      path: '/categories/:category_slug',
       name: 'category',
       component: CategoryView,
     },
