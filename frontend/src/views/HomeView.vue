@@ -39,8 +39,8 @@ export default {
   <Featured />
   <div class="row g-5">
     <div class="col-md-8">
-          <h2  class="display-4 text-center">Posts</h2>
-
+      <h2  class="display-4 text-center">Posts</h2>
+      
       <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" v-for="post in posts" v-bind:key="post.id">
         <div class="col p-4 d-flex flex-column position-static"> 
           <strong class="d-inline-block mb-2 text-success-emphasis">hh</strong>

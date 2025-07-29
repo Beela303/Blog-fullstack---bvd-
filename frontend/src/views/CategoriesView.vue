@@ -38,15 +38,15 @@ export default {
             <h2 class="display-4 text-center">Categories</h2>
 
             <div class="container">
-                <div class="row" v-for="categories in categories" v-bind:key="categories.id">
+                <div class="row" v-for="category in categories" v-bind:key="category.id">
 
                     <div class="col-md-6 mb-4">
-                        <router-link to="">
+                        <router-link :to="category.get_absolute_url">
                             <div class="card">
                                 <img src="../assets/1.jpeg" alt="" class="card-img-top">
                                 <div class="card-body">
-                                    <h5 class="card-title text-center">{{ categories.name }}</h5>
-                                    <p class="card-title">{{ categories.description }}</p>
+                                    <h5 class="card-title text-center">{{ category.name }}</h5>
+                                    <p class="card-title">{{ category.description }}</p>
                                 </div>
                             </div>
                         </router-link>

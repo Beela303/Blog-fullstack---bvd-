@@ -20,7 +20,7 @@ class Category(models.Model) :
         return self.name
 
     def get_absolute_url(self):
-        return f'/{self.slug}/'
+        return f'/categories/{self.slug}/'
 
 class Post(models.Model) :
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="author")
