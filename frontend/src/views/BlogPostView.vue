@@ -31,6 +31,14 @@ export default {
                     console.log(error)
                 })
         },
+
+        formatDate(date) {
+          const dateObject = new Date(date)
+          const day = dateObject.getDate().toString().padStart(2, '0')
+          const month = (dateObject.getMonth() + 1).toString().padStart(2, '0')
+          const year = dateObject.getFullYear()
+          return `${day}/${month}/${year}`
+        }
     }
 }
 </script>
@@ -43,9 +51,9 @@ export default {
       </h3>
       <article class="blog-post">
         <h2 class="display-5 link-body-emphasis mb-1">{{ postDetail.title }}</h2>
-        <h3>Category {{ postDetail.category }}</h3>
-        <p class="blog-post-meta">Created on : {{ postDetail.created_on }} by <a href="#">{{ postDetail.author }}</a></p>
-        <p class="blog-post-meta">Updated on : {{ postDetail.updated_on }}</p>
+        <h3>Category: {{ postDetail.category }}</h3>
+        <p class="blog-post-meta">Created on : {{ formatDate(postDetail.created_on) }} by <a href="#">{{ postDetail.author }}</a></p>
+        <p class="blog-post-meta">Updated on : {{ formatDate(postDetail.updated_on) }}</p>
         <p>{{ postDetail.content }}</p>
         <!--<p>This blog post shows a few different types of content that’s supported and styled with Bootstrap.
           Basic typography, lists, tables, images, code, and more are all supported as expected.</p>

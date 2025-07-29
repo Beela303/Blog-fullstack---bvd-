@@ -37,6 +37,7 @@ export default {
 
 <template>
   <Featured />
+
   <div class="row g-5">
     <div class="col-md-8">
       <h2  class="display-4 text-center">Posts</h2>

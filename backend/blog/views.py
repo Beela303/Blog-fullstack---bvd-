@@ -35,7 +35,6 @@ class CategoriesView(generics.ListCreateAPIView):
 class CategoryView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    lookup_field = 'slug'
 
     def get_object(self, category_slug):
         try:
@@ -47,3 +46,9 @@ class CategoryView(generics.RetrieveUpdateDestroyAPIView):
         category = self.get_object(category_slug)
         serializer = CategorySerializer(category)
         return Response(serializer.data)
+    
+class CategoryPostsView(generics.ListAPIView):
+    serializer_class = PostSerializer
+
+    def get_queryset(self):
+        return Post.objects.filter(category__slug = self.kwargs['slug'])
