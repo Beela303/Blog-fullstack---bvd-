@@ -11,6 +11,7 @@ STATUS = (
 class Category(models.Model) :
     name = models.CharField(max_length=30)
     description = models.TextField(null=False)
+    slug = models.SlugField(max_length=500, unique=True)
 
     class Meta:
         verbose_name_plural = "Categories"
@@ -18,21 +19,27 @@ class Category(models.Model) :
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return f'/{self.slug}/'
+
 class Post(models.Model) :
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="blog_posts")
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="author")
     title = models.CharField(max_length=50)
     content = models.TextField()
     slug = models.SlugField(max_length=500, unique=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     status = models.IntegerField(choices=STATUS, default=0)
-    categories = models.ManyToManyField(Category, related_name ="posts")
+    category = models.ForeignKey(Category, related_name ="posts", on_delete=models.CASCADE)
 
     class Meta :
         ordering = ['-created_on']
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return f'/{self.category.slug}/{self.slug}/'
     
 class Comment(models.Model) :
     author = models.CharField(max_length=60)

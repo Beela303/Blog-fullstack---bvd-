@@ -7,7 +7,7 @@
 export default {
   data() {
     return {
-      blogPosts: []
+      posts: []
     }
   },
 
@@ -23,9 +23,9 @@ export default {
   methods: {
     getBlogPosts() {
       axios
-        .get('api/postlist/')
+        .get('posts/')
         .then(response => {
-          this.blogPosts = response.data
+          this.posts = response.data
         })
         .catch(error => {
           console.log(error)
@@ -41,9 +41,9 @@ export default {
     <div class="col-md-8">
           <h2  class="display-4 text-center">Posts</h2>
 
-      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"  v-for="post in blogPosts" v-bind:key="post.id">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" v-for="post in posts" v-bind:key="post.id">
         <div class="col p-4 d-flex flex-column position-static"> 
-          <strong class="d-inline-block mb-2 text-success-emphasis">{{ post.categories.name }}</strong>
+          <strong class="d-inline-block mb-2 text-success-emphasis">hh</strong>
           <h3 class="mb-0">{{ post.title }}</h3>
 
           <div class="mb-1 text-body-secondary">{{ post.created_on }}</div>

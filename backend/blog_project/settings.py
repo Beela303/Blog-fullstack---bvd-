@@ -20,13 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-m4a!1x+(26+c%7l9wwyy^=y^7xednn=%_*&f6p)tra_3b97d6g'
+SECRET_KEY = 'django-insecure-%a+2o3y*$plc88!dhzv&4nc2a=&kaj$pwcgfofre4f(y_6=s=u'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -47,7 +46,7 @@ INSTALLED_APPS = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
+    "http://localhost:5174",
 ]
 
 MIDDLEWARE = [
@@ -125,7 +124,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
- 
+
 STATIC_URL = 'static/'
 
 # Default primary key field type

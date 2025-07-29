@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import PostListCreateView, PostDetailView,  CategoryListCreateView, CategoryDetailView
+from .views import PostsView, PostView,  CategoriesView, CategoryView
 
 urlpatterns = [
-    path('api/postlist/', PostListCreateView.as_view(), name='PostListCreateView'),
-    path('api/postdetail/<int:pk>/', PostDetailView.as_view(), name='PostDetailView'),
-    path('api/categorylist/', CategoryListCreateView.as_view(), name='CategoryListCreateView'),
-    path('api/categorydetail/<int:pk>/', CategoryDetailView.as_view(), name='CategoryDetailView'),
+    path('posts/', PostsView.as_view(), name='Blog Posts'),
+    path('<slug:category_slug>/<slug:post_slug>/', PostView.as_view(), name='Blog Post'),
+    path('categories/', CategoriesView.as_view(), name='Categories'),
+    path('categories/<slug:category_slug>/', CategoryView.as_view(), name='Category'),
 ]
