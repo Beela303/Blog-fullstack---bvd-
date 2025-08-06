@@ -1,8 +1,45 @@
+<script>
+  import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      featuredPosts: []
+    }
+  },
+
+  mounted() {
+    this.getFeaturedPosts()
+  },
+
+  methods: {
+    getFeaturedPosts() {
+      axios
+        .get('posts/1')
+        .then(response => {
+          this.FeaturedPosts = response.data
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+
+    formatDate(date) {
+        const dateObject = new Date(date)
+        const day = dateObject.getDate().toString().padStart(2, '0')
+        const month = (dateObject.getMonth() + 1).toString().padStart(2, '0')
+        const year = dateObject.getFullYear()
+        return `${day}/${month}/${year}`
+      }
+  }
+}
+</script>
+
 <template>
     <main class="container">
         <div class="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary">
             <div class="col-lg-6 px-0">
-                <h1 class="display-4 fst-italic">Title of a longer featured blog post</h1>
+                <h1 class="display-4 fst-italic">{{featuredPosts.title}}</h1>
                 <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and
                     efficiently about what’s most interesting in this post’s contents.</p>
                 <p class="lead mb-0"><a href="#" class="text-body-emphasis fw-bold">Continue reading...</a></p>

@@ -4,17 +4,17 @@ import Aside from '@/components/Aside.vue';
 
 export default {
     components : {
-        Aside,
+      Aside,
     },
 
     data() {
-        return {
-            postDetail: {},
-        }
+      return {
+        postDetail: {},
+      }
     },
 
     mounted() {
-        this.getPostDetail()
+      this.getPostDetail()
     },
 
     methods: {

@@ -3,7 +3,7 @@ from .models import Category, Post, Comment
 
 # Register your models here.
 class CategoryAdmin(admin.ModelAdmin) :
-        list_display = ('name', 'description', 'slug')
+    list_display = ('name', 'description', 'slug')
 
 class PostAdmin(admin.ModelAdmin) :
     list_display = ['title', 'content', 'created_on', 'status', 'category']
@@ -13,10 +13,15 @@ class PostAdmin(admin.ModelAdmin) :
     class Meta:
          ordering = ('-created_on')
 
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'body', 'post', 'created_on', 'active')
+    list_filter = ('active', 'created_on')
+    search_fields = ('name', 'email', 'body')
+    actions = ['approve_comments']
 
-class CommentAdmin(admin.ModelAdmin) :
-    pass
+    def approve_comments(self, request, queryset):
+        queryset.update(active=True)
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Post, PostAdmin)
-admin.site.register(Comment, CommentAdmin)

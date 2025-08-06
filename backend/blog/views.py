@@ -26,6 +26,12 @@ class PostView(generics.RetrieveUpdateDestroyAPIView):
         post = self.get_object(category_slug, post_slug)
         serializer = PostSerializer(post)
         return Response(serializer.data)
+    
+
+class PostDetailView(generics.RetrieveAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    lookup_field = 'id'
 
 # Category Views
 class CategoriesView(generics.ListCreateAPIView):
@@ -35,6 +41,7 @@ class CategoriesView(generics.ListCreateAPIView):
 class CategoryView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    lookup_field = 'slug'
 
     def get_object(self, category_slug):
         try:
