@@ -4,8 +4,8 @@ from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from .models import Post, Category
-from .serializers import PostSerializer, CategorySerializer
+from .models import Post, Category, Comment
+from .serializers import PostSerializer, CategorySerializer, CommentSerializer
 
 # Blog Views
 class PostsView(generics.ListCreateAPIView):
@@ -59,3 +59,19 @@ class CategoryPostsView(generics.ListAPIView):
 
     def get_queryset(self):
         return Post.objects.filter(category__slug = self.kwargs['slug'])
+
+class CommentListView(generics.ListCreateAPIView):
+    serializer_class = CommentSerializer
+    lookup_field = 'slug'
+
+    def get_queryset(self):
+        post_slug = self.kwargs['post_slug']
+        return Comment.objects.filter(post__slug=post_slug)
+    
+    def porform_create(self, serializer):
+        post_slug = self.kwargs['post_slug']
+        serializer.save(post_slug=post_slug)
+
+class CommentDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer

@@ -7,15 +7,39 @@ export default {
       Aside,
     },
 
+    props: [
+      'postSlug'
+    ],
+
     data() {
       return {
         postDetail: {},
+
+        comments: [],
+
+        newComment: {
+          name : "",
+          email : "",
+          body : ""
+        }
       }
     },
 
     mounted() {
-      this.getPostDetail()
+      this.getPostDetail(),
+      this.getPostComments(),
+      this.addComment()
     },
+
+    //created(){
+     // axios.get('/')
+      //  .then(response => {
+       //   this.comments = response.data;
+        //})
+        //.catch(error => {
+         // console.log(error);
+        //});
+    //},
 
     methods: {
         getPostDetail() {
@@ -38,6 +62,35 @@ export default {
           const month = (dateObject.getMonth() + 1).toString().padStart(2, '0')
           const year = dateObject.getFullYear()
           return `${day}/${month}/${year}`
+        },
+
+        getPostComments() {
+            const post_slug = this.$route.params.post_slug
+
+            axios
+                .get(`comments/${post_slug}`)
+                .then(response => {
+                    this.comments= response.data 
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        },
+
+        addComment() {
+          const post_slug = this.$route.params.post_slug
+
+          axios
+            .post(`comments/${post_slug}`, this.newComment)
+            .then(response => {
+              this.comments.push(response.data);
+              this.newComment.name = "";
+              this.newComment.email = "";
+              this.newComment.body = "";
+            })
+            .catch(error => {
+              console.error(error);
+            });
         }
     }
 }
@@ -135,6 +188,24 @@ export default {
       <nav class="blog-pagination" aria-label="Pagination"> <a class="btn btn-outline-primary rounded-pill"
           href="#">Older</a> <a class="btn btn-outline-secondary rounded-pill disabled" aria-disabled="true">Newer</a>
       </nav>
+
+      <div id="details">
+        <h2>Comments</h2>
+
+        <ul>
+          <li v-for="comment in comments" :key="comment.id">
+            {{ comment.name }} at  {{ formatDate(comment.created_on) }}  : {{ comment.body }}
+          </li>
+        </ul>
+
+        <form @submit.prevent="addComment">
+          <input v-model="newComment.name" placeholder="Name">
+          <input v-model="newComment.email" placeholder="E-mail">
+          <textarea v-model="newComment.body" placeholder="Content"></textarea>
+
+          <button type="submit" v-on:click="addComment">Add Comment</button>
+        </form>
+      </div>
     </div>
 
   <Aside />
