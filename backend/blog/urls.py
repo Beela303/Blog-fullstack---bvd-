@@ -1,5 +1,7 @@
 from django.urls import path
-from .views import PostsView, PostView, PostDetailView,  CategoriesView, CategoryView, CategoryPostsView, CommentListView, CommentDetailView
+from rest_framework import routers
+from . import views
+from .views import ( PostsView, PostView, PostDetailView,  CategoriesView, CategoryView, CategoryPostsView, CommentListView, CommentDetailView, RecentPostsView)
 
 urlpatterns = [
     path('posts/', PostsView.as_view(), name='Blog Posts'),
@@ -11,5 +13,10 @@ urlpatterns = [
     path('categories/<slug:category_slug>/posts/', CategoryPostsView.as_view(), name='Posts in Category'),
 
     path('comments/<slug:post_slug>', CommentListView.as_view(), name='Comments'),
-    path('comments/<slug:post_slug>', CommentDetailView.as_view(), name='Comment Detail'),
+    path('comments/<slug:post_slug>/detail', CommentDetailView.as_view(), name='Comment Detail'),
 ]
+
+router = routers.DefaultRouter()
+router.register(r'posts/recentposts', RecentPostsView, basename="Recent Posts")
+
+urlpatterns += router.urls

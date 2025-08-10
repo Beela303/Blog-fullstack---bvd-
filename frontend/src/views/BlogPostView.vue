@@ -8,7 +8,7 @@ export default {
     },
 
     props: [
-      'postSlug'
+      'post_slug'
     ],
 
     data() {
@@ -81,7 +81,7 @@ export default {
           const post_slug = this.$route.params.post_slug
 
           axios
-            .post(`comments/${post_slug}`, this.newComment)
+            .post("comments/${post_slug}", this.newComment)
             .then(response => {
               this.comments.push(response.data);
               this.newComment.name = "";
@@ -103,7 +103,7 @@ export default {
         From the Empress
       </h3>
       <article class="blog-post">
-        <h2 class="display-5 link-body-emphasis mb-1">{{ postDetail.title }}</h2>
+        <h2 class="display-5 link-body-emphasis mb-1 text-white">{{ postDetail.title }}</h2>
         <h3>Category: {{ postDetail.category }}</h3>
         <p class="blog-post-meta">Created on : {{ formatDate(postDetail.created_on) }} by <a href="#">{{ postDetail.author }}</a></p>
         <p class="blog-post-meta">Updated on : {{ formatDate(postDetail.updated_on) }}</p>

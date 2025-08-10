@@ -38,7 +38,15 @@ export default {
         const month = (dateObject.getMonth() + 1).toString().padStart(2, '0')
         const year = dateObject.getFullYear()
         return `${day}/${month}/${year}`
+    },
+
+    truncateText(text, length) {
+      if (text.length > length) {
+        return text.substring(0, length) + '...';
       }
+      return text;
+    }
+
   }
 }
 </script>
@@ -56,7 +64,7 @@ export default {
           <h3 class="mb-0">{{ post.title }}</h3>
 
           <div class="mb-1 text-body-secondary">{{ formatDate(post.created_on) }}</div>
-          <p class="mb-auto">{{ post.content }}</p>
+          <p class="mb-auto">{{ truncateText(post.content, 100) }}</p>
           <router-link :to="post.get_absolute_url" class="btn btn-secondary">Read More...</router-link>
         </div>
 
